@@ -10,8 +10,20 @@ namespace ApiLojista.Negocios
             Orcamento novoOrcamento = new Orcamento(){};
 
             novoOrcamento = orcamento;
+            orcamento.Status = OrcamentoStatus.Pendente;
 
             return novoOrcamento;
+        }
+        
+        public Orcamento AtualizarOrcamentoStatus(int id, OrcamentoStatus status)
+        {
+            Orcamento orcamento = new Orcamento(){};
+
+//            orcamento = Orcamento.Where(Id = id);
+
+            orcamento.Status = status;
+
+            return orcamento;
         }
     }
 }

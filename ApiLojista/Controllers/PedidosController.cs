@@ -16,7 +16,7 @@ namespace ApiLojista.Controllers
         private static readonly HttpClient client = new HttpClient();
         private readonly string _URLCriacaoPedido = "https://localhost:5001/v1/pedido";
         
-        [HttpPut]
+        [HttpPost]
         public async Task<ActionResult<Pedido>> Post([FromBody]Pedido pedido)
         {
             Pedido novoPedido = new Pedido();

@@ -19,15 +19,13 @@ namespace ApiLojista.Negocios
         
         public Notificacao AtualizarNotificacaoOrcamento(int idPedido, int idOrcamento)
         {
-            Notificacao notificacao = new Notificacao()
-            {
-                
-            };
+            Notificacao notificacao = new Notificacao() {};
 
-            //Pesquisar na lista
+            //TODO: Pesquisar na lista
 //            Notificacao notificacao = Notificacao.Where(idOrcamento && idPedido);
 
             notificacao.IdOrcamento = idOrcamento;
+            notificacao.IdPedido = idPedido;
 
             return notificacao;
         }
