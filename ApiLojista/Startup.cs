@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using System.IO;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ApiLojista
 {
@@ -25,7 +21,15 @@ namespace ApiLojista
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "API Lojista", Version = "v1" });
+
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "Lojista.xml");
+                c.IncludeXmlComments(filePath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +47,24 @@ namespace ApiLojista
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseSwagger(c =>
+            {
+                c.PreSerializeFilters.Add((document, request) =>
+                {
+                    var paths = document.Paths.ToDictionary(item => item.Key.ToLowerInvariant(), item => item.Value);
+                    document.Paths.Clear();
+                    foreach (var pathItem in paths)
+                    {
+                        document.Paths.Add(pathItem.Key, pathItem.Value);
+                    }
+                });
+            });
+            
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Lojista");
+            });
         }
     }
 }
