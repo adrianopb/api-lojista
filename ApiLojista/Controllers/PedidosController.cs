@@ -14,7 +14,7 @@ namespace ApiLojista.Controllers
     {
         private PedidoNegocio _pedidoNegocio = new PedidoNegocio();
         private static readonly HttpClient client = new HttpClient();
-        private readonly string _URLCriacaoPedido = "https://localhost:5001/v1/pedido";
+        private readonly string _URLCriacaoPedido = "https://localhost:5001/v1/pedidos";
         
         [HttpPost]
         public async Task<ActionResult<Pedido>> Post([FromBody]Pedido pedido)
@@ -37,7 +37,7 @@ namespace ApiLojista.Controllers
         }
         
         [HttpPut("{id}/status")]
-        public ActionResult Put([FromRoute]int id, [FromBody]PedidoStatus status)
+        public ActionResult Put(int id, [FromBody]PedidoStatus status)
         {
             //TODO: função de atualizar o status do pedido
             return Ok(_pedidoNegocio.AtualizarPedidoStatus(id, status));

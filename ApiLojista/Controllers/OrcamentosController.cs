@@ -15,7 +15,7 @@ namespace ApiLojista.Controllers
         private OrcamentoNegocio _orcamentoNegocio = new OrcamentoNegocio();
         private NotificacaoNegocio _notificacaoNegocio = new NotificacaoNegocio();
         private static readonly HttpClient client = new HttpClient();
-        private readonly string _URLAtualizacaoOrcamento = "https://localhost:5000/v1/orcamento";
+        private readonly string _URLAtualizacaoOrcamento = "https://localhost:5000/v1/orcamentos";
         
         [HttpPost]
         public ActionResult<Notificacao> Post([FromBody]Orcamento orcamento)
@@ -30,7 +30,7 @@ namespace ApiLojista.Controllers
         }
         
         [HttpPut("{id}")]
-        public async Task<ActionResult<Orcamento>> Put([FromRoute]int id, [FromBody]OrcamentoStatus status)
+        public async Task<ActionResult<Orcamento>> Put(int id, [FromBody]OrcamentoStatus status)
         {
             //TODO: função de verificar status orcamento = pendente (genérico) -> modelo : orcamento -> paramentros id orcamento, string status
             
