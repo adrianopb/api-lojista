@@ -37,9 +37,8 @@ namespace ApiLojista.Controllers
         }
         
         [HttpPut("{id}/status")]
-        public ActionResult Put(int id, [FromBody]PedidoStatus status)
+        public ActionResult Put(int id, [FromBody]int status)
         {
-            //TODO: função de atualizar o status do pedido
             return Ok(_pedidoNegocio.AtualizarPedidoStatus(id, status));
         }
     }

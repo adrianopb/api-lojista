@@ -30,12 +30,12 @@ namespace ApiLojista.Controllers
         }
         
         [HttpPut("{id}")]
-        public async Task<ActionResult<Orcamento>> Put(int id, [FromBody]OrcamentoStatus status)
+        public async Task<ActionResult<Orcamento>> Put(int id, [FromBody]int status)
         {
-            //TODO: função de verificar status orcamento = pendente (genérico) -> modelo : orcamento -> paramentros id orcamento, string status
+            Orcamento orcamento = new Orcamento();
             
-            //TODO: função de atualizar orcamento -> modelo : orcamento -> paramentro id orcamento   (aceito)
-            _orcamentoNegocio.AtualizarOrcamentoStatus(id, status);
+            //Função de atualizar orcamento -> modelo : orcamento -> paramentro id orcamento   (aceito)
+            orcamento = _orcamentoNegocio.AtualizarOrcamentoStatus(id, status);
 
             //Função de atualizar o orçamento na API do atacadista
             var respostaOrcamento = await client.PostAsJsonAsync(_URLAtualizacaoOrcamento + "/" + id, status);
@@ -46,7 +46,7 @@ namespace ApiLojista.Controllers
                 throw new Exception(respostaOrcamentoString);
             }
             
-            return Ok();
+            return Ok(orcamento);
         }
     }
 }

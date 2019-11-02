@@ -1,14 +1,14 @@
-﻿﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ApiLojista.Enum
 {
     public enum OrcamentoStatus
     {
         [Display(Name="Pendente")]
-        Pendente,
+        Pendente = 1,
         [Display(Name="Aceito")]
-        Aceito,
+        Aceito = 2,
         [Display(Name="Rejeitado")]
-        Rejeitado
+        Rejeitado = 3
     }
 }

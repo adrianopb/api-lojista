@@ -1,16 +1,16 @@
-﻿﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ApiLojista.Enum
 {
     public enum PedidoStatus
     { 
         [Display(Name="Solicitado")]
-        Solicitado,
+        Solicitado = 1,
         [Display(Name="Em fabricação")]
-        EmFabricacao,
+        EmFabricacao = 2,
         [Display(Name="Finalizado")]
-        Finalizado, 
+        Finalizado = 3, 
         [Display(Name="Despachado")]
-        Despachado
+        Despachado = 4
     }
 }
