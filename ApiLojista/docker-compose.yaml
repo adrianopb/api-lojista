@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  apilojista-2-2-alpine:
+    image: apilojista-sdk-2-2-alpine
+    build:
+      context: .
+    ports:
+      - "15000:80"
